@@ -3,20 +3,6 @@ const CONFIG_MACRO = {
   actionTitle: "Atak bronią główną",
 };
 
-// ============= OBIERANIE TARGETU ============== //
-
-let targets = []
-game.user.targets.forEach(i => {
-    const name = i.name;
-    targets.push(name);
-})
-
-if (targets.length === 0)
-{
-  ui.notifications.info("Wpierw wybierz target");
-  return;
-}
-
 // =============== SPRAWDŹ CZY TARGET JEST WYBRANY ============= //
 
 const targetToken = Array.from(game.user.targets)[0];
@@ -43,5 +29,6 @@ if(!item.system.hasAmmo())
 {
    return ui.notifications.error(`Nie możesz strzelić z ${item.name} bo nie jest przeładowany`);
 }
+
 
 await user.setupWeaponTest(heldItemId);
