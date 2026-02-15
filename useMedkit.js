@@ -17,21 +17,7 @@ const resultHtml = function(username, targetActorName, woundsHealed, successLeve
   return html;
 }
 
-// ============= OBIERANIE TARGETU ============== //
-
-let targets = []
-game.user.targets.forEach(i => {
-    const name = i.name;
-    targets.push(name);
-})
-
-if (targets.length === 0)
-{
-  ui.notifications.info("Wpierw wybierz target");
-  return;
-}
-
-// =============== FETCH CHAR BONUS TARGETU ============= //
+// =============== WYBIERZ BONUS TARGETU ============= //
 
 const targetToken = Array.from(game.user.targets)[0];
 if (!targetToken) return ui.notifications.info("Najpierw wybierz target (T).");
@@ -56,7 +42,7 @@ if(CONFIG_MACRO.consumableItemName)
   // kontynuuj wtw gdy przedmiot istnieje w eq i qty > 0
   if(!consumableItem || consumableCount <= 0)
   {
-    return ui.notifications.error("Nie posiadasz medykamentów!")
+    return ui.notifications.error("Nie posiadasz wymaganych przedmiotów: " + CONFIG_MACRO.consumableItemName)
   }
 
 }
@@ -111,4 +97,5 @@ try {
     const tok = canvas.tokens?.get(tokenId);
     if (tok) await tok.setTarget(true, { releaseOthers: false });
   }
+
 }
